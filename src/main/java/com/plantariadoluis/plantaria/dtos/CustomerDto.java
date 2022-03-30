@@ -7,8 +7,9 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-@Getter @Setter
-public class ClientDto {
+@Getter
+@Setter
+public class CustomerDto {
 
     @NotBlank
     private String name;

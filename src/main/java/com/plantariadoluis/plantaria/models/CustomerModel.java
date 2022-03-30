@@ -3,21 +3,20 @@ package com.plantariadoluis.plantaria.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "CLIENTE")
+@Table(name = "CUSTOMER")
 @Getter
 @Setter
 @NoArgsConstructor
-public class ClientModel {
+public class CustomerModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", columnDefinition = "BINARY(16)")
+    @Column(name = "customer_id", columnDefinition = "BINARY(16)")
     private UUID id;
     @Column(nullable = false, length = 70)
     private String name;
