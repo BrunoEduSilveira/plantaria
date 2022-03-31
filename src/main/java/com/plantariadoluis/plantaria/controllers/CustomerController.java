@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +42,8 @@ public class CustomerController {
         }
         CustomerModel customerModel = new CustomerModel();
         BeanUtils.copyProperties(customerDto, customerModel);
+        customerModel.setEmail(customerModel.getEmail().toLowerCase(Locale.ROOT));
+
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.save(customerModel));
     }
 
