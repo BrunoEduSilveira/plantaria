@@ -36,7 +36,7 @@ public class CustomerController {
         if (customerService.existsByEmail(customerDto.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Email is already in use.");
         }
-        if(customerService.existsByTelephone(customerDto.getTelephone())){
+        if (customerService.existsByTelephone(customerDto.getTelephone())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Telephone is already in use.");
         }
         CustomerModel customerModel = new CustomerModel();
@@ -73,6 +73,12 @@ public class CustomerController {
         Optional<CustomerModel> customerModelOptional = customerService.findById(id);
         if (!customerModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
+        }
+        if (!customerDto.getCpf().equals(customerModelOptional.get().getCpf())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("CPF can't be change.");
+        }
+        if (!customerDto.getName().equals(customerModelOptional.get().getName())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Name can't be change.");
         }
         CustomerModel customerModel = customerModelOptional.get();
         BeanUtils.copyProperties(customerDto, customerModel);

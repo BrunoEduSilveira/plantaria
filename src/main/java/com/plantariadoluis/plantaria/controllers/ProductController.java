@@ -31,7 +31,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Object> saveProduct(@RequestBody @Valid @NotNull ProductDto productDto) {
         if(productDto.getPrice() < 0.1){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: You are trying to set value equal to zero.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: You are trying to set value equal to zero.");
         }
         if (productService.existsByName(productDto.getName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: The product name is already in use.");

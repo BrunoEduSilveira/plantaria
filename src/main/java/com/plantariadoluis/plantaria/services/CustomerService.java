@@ -32,7 +32,9 @@ public class CustomerService {
         return customerRepository.existsByEmail(email);
     }
 
-    public boolean existsByTelephone(String telephone) { return customerRepository.existsByTelephone(telephone); }
+    public boolean existsByTelephone(String telephone) {
+        return customerRepository.existsByTelephone(telephone);
+    }
 
     public Page<CustomerModel> findAll(Pageable page) {
         return customerRepository.findAll(page);
