@@ -36,7 +36,7 @@ public class AdminService {
         return adminRepository.findAll(page);
     }
 
-    public Optional<AdminModel> findById(UUID id) {
+    public Optional<AdminModel> findById(long id) {
         return adminRepository.findById(id);
     }
 

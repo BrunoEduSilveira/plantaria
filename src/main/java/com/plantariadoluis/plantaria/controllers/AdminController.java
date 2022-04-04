@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -47,7 +46,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneAdmin(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneAdmin(@PathVariable(value = "id") long id) {
         Optional<AdminModel> adminModelOptional = adminService.findById(id);
         if (!adminModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Administrator not found.");
@@ -56,7 +55,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteAdmin(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteAdmin(@PathVariable(value = "id") long id) {
         Optional<AdminModel> adminModelOptional = adminService.findById(id);
         if (!adminModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Administrator not found.");
@@ -66,7 +65,7 @@ public class AdminController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateAdmin(@PathVariable(value = "id") UUID id, @RequestBody @Valid AdminDto adminDto) {
+    public ResponseEntity<Object> updateAdmin(@PathVariable(value = "id") long id, @RequestBody @Valid AdminDto adminDto) {
         Optional<AdminModel> adminModelOptional = adminService.findById(id);
         if (!adminModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Administrator not found.");

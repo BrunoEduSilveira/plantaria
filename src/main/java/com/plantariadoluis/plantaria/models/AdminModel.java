@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "ADMINISTRATOR")
@@ -16,8 +15,8 @@ public class AdminModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "admin_id", columnDefinition = "BINARY(16)")
-    private UUID id;
+    @Column(name = "admin_id")
+    private long id;
     @Column(nullable = false, unique = true, length = 130)
     private String email;
     @Column(nullable = false, unique = true, length = 130)

@@ -28,11 +28,11 @@ public class ProductService {
         return productRepository.existsByName(name);
     }
 
-    public Page<ProductModel> findAll(Pageable page){
+    public Page<ProductModel> findAll(Pageable page) {
         return productRepository.findAll(page);
     }
 
-    public Optional<ProductModel> findById(UUID id) {
+    public Optional<ProductModel> findById(long id) {
         return productRepository.findById(id);
     }
 

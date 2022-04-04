@@ -3,9 +3,11 @@ package com.plantariadoluis.plantaria.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -16,11 +18,13 @@ public class ProductModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id", columnDefinition = "BINARY(16)")
-    private UUID id;
+    @Column(name = "product_id")
+    private long id;
     @Column(nullable = false, length = 130)
     private String name;
     @Column(nullable = false)
     private float price;
     private String note;
+    @Column(nullable = false)
+    private int quantity;
 }

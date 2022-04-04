@@ -42,12 +42,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductModel>> getAllProducts(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable page) {
+    public ResponseEntity<Page<ProductModel>> getAllProducts(@PageableDefault(size = 20, sort = "name", direction = Sort.Direction.ASC) Pageable page) {
         return ResponseEntity.status(HttpStatus.OK).body(productService.findAll(page));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") long id) {
         Optional<ProductModel> productModelOptional = productService.findById(id);
         if (!productModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
@@ -56,7 +56,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") long id) {
         Optional<ProductModel> productModelOptional = productService.findById(id);
         if (!productModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
@@ -66,7 +66,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") UUID id, @RequestBody @Valid ProductDto productDto) {
+    public ResponseEntity<Object> updateProduct(@PathVariable(value = "id") long id, @RequestBody @Valid ProductDto productDto) {
         Optional<ProductModel> productModelOptional = productService.findById(id);
         if (!productModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
