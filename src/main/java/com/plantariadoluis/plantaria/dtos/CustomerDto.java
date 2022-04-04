@@ -1,13 +1,11 @@
 package com.plantariadoluis.plantaria.dtos;
 
-import com.plantariadoluis.plantaria.models.OrderModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,9 +13,11 @@ public class CustomerDto {
 
     @NotBlank
     private String name;
-    @Email @NotBlank
+    @Email
+    @NotBlank
     private String email;
-    @CPF @NotBlank
+    @CPF
+    @NotBlank
     private String cpf;
     @NotBlank
     private String address;

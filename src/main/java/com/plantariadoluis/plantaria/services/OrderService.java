@@ -1,6 +1,5 @@
 package com.plantariadoluis.plantaria.services;
 
-import com.plantariadoluis.plantaria.models.CustomerModel;
 import com.plantariadoluis.plantaria.models.OrderModel;
 import com.plantariadoluis.plantaria.repositories.OrderRepository;
 import org.springframework.data.domain.Page;

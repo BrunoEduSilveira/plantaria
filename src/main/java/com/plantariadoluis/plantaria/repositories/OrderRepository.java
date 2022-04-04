@@ -1,6 +1,5 @@
 package com.plantariadoluis.plantaria.repositories;
 
-import com.plantariadoluis.plantaria.models.CustomerModel;
 import com.plantariadoluis.plantaria.models.OrderModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -91,7 +91,7 @@ public class OrderController {
         OrderModel orderModel = orderModelOptional.get();
         BeanUtils.copyProperties(orderDto, orderModel);
         orderModel.setId(orderModelOptional.get().getId());
-        if ((orderModelOptional.get().getStatus() !=  orderDto.getStatus())){
+        if ((orderModelOptional.get().getStatus() != orderDto.getStatus())) {
             orderModel.setDateModified(LocalDateTime.now(ZoneId.of("UTC")));
         }
         return ResponseEntity.status(HttpStatus.OK).body(orderService.save(orderModel));
