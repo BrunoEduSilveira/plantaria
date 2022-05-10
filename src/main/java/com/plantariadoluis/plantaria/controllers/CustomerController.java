@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -37,8 +36,8 @@ public class CustomerController {
         if (customerService.existsByEmail(customerDto.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Email is already in use.");
         }
-        if (customerService.existsByTelephone(customerDto.getTelephone())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Telephone is already in use.");
+        if (customerService.existsByPhone(customerDto.getPhone())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Phone is already in use.");
         }
         CustomerModel customerModel = new CustomerModel();
         BeanUtils.copyProperties(customerDto, customerModel);
@@ -48,12 +47,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CustomerModel>> getAllCustomers(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable page) {
+    public ResponseEntity<Page<CustomerModel>> getAllCustomers(@PageableDefault(size = 20, sort = "id", direction = Sort.Direction.ASC) Pageable page) {
         return ResponseEntity.status(HttpStatus.OK).body(customerService.findAll(page));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneCustomer(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOneCustomer(@PathVariable(value = "id") long id) {
         Optional<CustomerModel> customerModelOptional = customerService.findById(id);
         if (!customerModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
@@ -62,7 +61,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteCustomer(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deleteCustomer(@PathVariable(value = "id") long id) {
         Optional<CustomerModel> customerModelOptional = customerService.findById(id);
         if (!customerModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
@@ -72,7 +71,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateCustomer(@PathVariable(value = "id") UUID id, @RequestBody @Valid CustomerDto customerDto) {
+    public ResponseEntity<Object> updateCustomer(@PathVariable(value = "id") long id, @RequestBody @Valid CustomerDto customerDto) {
         Optional<CustomerModel> customerModelOptional = customerService.findById(id);
         if (!customerModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
@@ -86,9 +85,8 @@ public class CustomerController {
         CustomerModel customerModel = customerModelOptional.get();
         BeanUtils.copyProperties(customerDto, customerModel);
         customerModel.setId(customerModelOptional.get().getId());
+        customerModel.setEmail(customerModel.getEmail().toLowerCase(Locale.ROOT));
 
         return ResponseEntity.status(HttpStatus.OK).body(customerService.save(customerModel));
     }
-
-
 }

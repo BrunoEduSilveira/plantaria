@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AdminService {
@@ -36,7 +35,7 @@ public class AdminService {
         return adminRepository.findAll(page);
     }
 
-    public Optional<AdminModel> findById(UUID id) {
+    public Optional<AdminModel> findById(long id) {
         return adminRepository.findById(id);
     }
 

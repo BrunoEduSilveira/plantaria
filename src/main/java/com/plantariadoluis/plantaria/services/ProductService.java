@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -28,11 +27,11 @@ public class ProductService {
         return productRepository.existsByName(name);
     }
 
-    public Page<ProductModel> findAll(Pageable page){
+    public Page<ProductModel> findAll(Pageable page) {
         return productRepository.findAll(page);
     }
 
-    public Optional<ProductModel> findById(UUID id) {
+    public Optional<ProductModel> findById(long id) {
         return productRepository.findById(id);
     }
 

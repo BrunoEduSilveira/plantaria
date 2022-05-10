@@ -14,11 +14,15 @@ public class CustomerDto {
     @NotBlank
     private String name;
     @Email
+    @NotBlank
     private String email;
     @CPF
+    @NotBlank
     private String cpf;
+    @NotBlank
     private String address;
-    private String numberAddress;
+    @NotBlank
     private String zipCode;
-    private String telephone;
+    @NotBlank
+    private String phone;
 }

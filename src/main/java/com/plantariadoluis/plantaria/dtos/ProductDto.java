@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -15,4 +14,5 @@ public class ProductDto {
     private float price;
     @NotBlank
     private String note;
+    private int quantity;
 }
